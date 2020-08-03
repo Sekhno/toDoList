@@ -20,6 +20,10 @@ body {
     background-color: #fff;
 }
 
+i {
+    font-size: 1.3rem !important;
+}
+
 
 .well {
     color: #818182;
@@ -48,6 +52,10 @@ body {
 .list-group-item {
     padding: 10px 0px 10px 27px;
     border: none;
+}
+
+.list-group-item.done {
+    font-style: italic;
 }
 
 @-webkit-keyframes fadeInDown {
