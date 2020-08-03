@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="todoApp">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To Do List</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.0/angular.min.js"></script>
+    <script src="./assets/js/todo.js"></script>
+    <link rel="stylesheet" href="//cdn.materialdesignicons.com/5.4.55/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="./assets/bootstrap-4.5.0-dist/css/bootstrap-grid.css">
+    <link rel="stylesheet" href="./assets/bootstrap-4.5.0-dist/css/bootstrap.css">
+    <link rel="stylesheet" href="./assets/css/todo.css">
+</head>
+<body ng-controller="TodoListController as todoList">
+    <div class="container-sm" >
+        <div class="row justify-content-md-center">
+            <div class="well col-md-5">TODO list</div>
+        </div>
+        
+        
+        <div class="row justify-content-md-center">
+            <ul class="list-group col-md-5">
+                <li class="list-group-item d-flex justify-content-between align-items-center" ng-repeat="todo in todoList.todos">
+                    <label class="d-flex justify-content-between align-items-center">
+                        <input class="hidden" type="checkbox" ng-model="todo.done">
+                        <i class="mdi mdi-checkbox-blank-circle-outline mr-4"
+                            ng-class="{'mdi-checkbox-marked-circle-outline': todo.done, 'mdi-checkbox-blank-circle-outline': !todo.done}">
+                        </i>
+                        <span>{{todo.text}}</span>
+                    </label>
+                    <i class="mdi mdi-delete" ng-show="todo.done" ng-click="todoList.removeTodo(todoList.todos.indexOf(todo))"></i>
+                </li>
+            </ul>
+        </div>
+        <div class="row justify-content-md-center">
+            <form class="form col-md-5">
+                <div class="input-group">
+                    <div class="input-group-prepend" ng-click="todoList.addTodo()">
+                        <i class="input-group-text mdi mdi-plus-thick"></i>
+                    </div>
+                    
+                    <input class="form-control" type="text" ng-model="todoList.todoText" on-keyup="todoList.addTodo()" key="13">
+                </div>
+                
+            </form>
+        </div>
+    </div>
+
+    <div class="modal" tabindex="-1" role="dialog" ng-class="{'fade show': todoList.modalShow}" on-keyup="todoList.showModal(false)" key="27">
+        <div class="modal-dialog animate__animated animate__fadeInDown">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Attention!</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="todoList.showModal(false)">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Task name must contain at least three letters.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" ng-click="todoList.showModal(false)">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
