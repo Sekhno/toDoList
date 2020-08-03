@@ -12,7 +12,7 @@
         todoList.todos = [];
 
         todoList.addTodo = function() {
-            var regex = /[\w]{3,}/;
+            var regex = /[^\s]{3,}/;
             console.log(this.todoText, regex.test(this.todoText));
             if (!this.todoText || !regex.test(this.todoText)) {
                 return this.showModal(true);
